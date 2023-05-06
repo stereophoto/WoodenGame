@@ -46,7 +46,7 @@ void handleButtons() {
       for (int j = 0; j < scoreBtn; j++) {
         score++;
         display.showNumberDec(score);
-        delay(delayDeault);
+        delay(delayDefault);
       }
     }
   }
