@@ -22,8 +22,11 @@ int score = 0;
 // Define default delay in millis
 int delayDefault = 10;
 
+// Array to store previous button states
+int previousButtonStates[buttonCount] = {HIGH, HIGH, HIGH};
+
 void setup() {
-  for(int i = 0; i < buttonCount; i++){
+  for (int i = 0; i < buttonCount; i++) {
     pinMode(buttonPins[i], INPUT_PULLUP);
   }
 
@@ -35,13 +38,15 @@ void setup() {
 
 void loop() {
   handleButtons();
-} 
+}
 
 // Handle buttons state
 void handleButtons() {
-  // Add points to the current user's score by pressing the "point" buttons
-  for(int i=0; i < buttonCount; i++){
-    if(digitalRead(buttonPins[i]) == LOW){
+  // Add points to the current user's score by pressing the "point" 
+buttons
+  for (int i = 0; i < buttonCount; i++) {
+    int currentButtonState = digitalRead(buttonPins[i]);
+    if (currentButtonState == LOW && previousButtonStates[i] == HIGH) {
       int scoreBtn = buttonPoints[i];
       for (int j = 0; j < scoreBtn; j++) {
         score++;
@@ -49,11 +54,13 @@ void handleButtons() {
         delay(delayDefault);
       }
     }
+    previousButtonStates[i] = currentButtonState;
   }
-  
+
   // Reset current user score by using "reset" button
-  if(digitalRead(resetPin) == LOW){
-      score = 0;
-      display.showNumberDec(score);
+  if (digitalRead(resetPin) == LOW) {
+    score = 0;
+    display.showNumberDec(score);
   }
 }
+
