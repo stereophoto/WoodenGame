@@ -54,7 +54,7 @@ void handleButtons() {
 
   // Reset current user score by using "reset" button
   if (digitalRead(resetPin) == LOW) {
-    score = changeDisplayNumber;
+    score = changeDisplayNumber(0);
   }
 }
 
@@ -81,5 +81,3 @@ int changeDisplayNumber(int numberToChange) {
   display.showNumberDec(numberToChange);
   return numberToChange;
 }
-
-
