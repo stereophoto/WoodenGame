@@ -43,11 +43,14 @@ void loop() {
 // Handle buttons state
 void handleButtons() {
   // Add points to the current user's score by pressing the "point" 
-  // buttons
+buttons
   for (int i = 0; i < buttonCount; i++) {
     int currentButtonState = digitalRead(buttonPins[i]);
     if (currentButtonState == LOW && previousButtonStates[i] == HIGH) {
       int scoreBtn = buttonPoints[i];
+      if (score - scoreBtn < 0) {
+        scoreBtn = score;
+      }
       for (int j = 0; j < scoreBtn; j++) {
         score++;
         display.showNumberDec(score);
@@ -63,4 +66,3 @@ void handleButtons() {
     display.showNumberDec(score);
   }
 }
-
