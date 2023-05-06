@@ -48,7 +48,7 @@ void handleButtons() {
     int currentButtonState = digitalRead(buttonPins[i]);
     if (currentButtonState == LOW && previousButtonStates[i] == HIGH) {
       int scoreBtn = buttonPoints[i];
-      if (score - scoreBtn < 0) {
+      if (score + scoreBtn < 0) {
         scoreBtn = score;
       }
       for (int j = 0; j < scoreBtn; j++) {
